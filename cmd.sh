@@ -29,8 +29,8 @@ elif [ $1 = "d" ]; then # diff mandatory
 	gcc -Wall -Wextra -Werror ../get_next_line.c \
 		../get_next_line_utils.c \
 		mandatory_main.c -D BUFFER_SIZE="$2"
-	./a.out $3 > output.txt && rm a.out output.txt
-	diff $3 output.txt
+	./a.out $3 > output.txt && rm a.out
+	diff $3 output.txt && rm output.txt
 	if [ $? = 0 ]; then
 		echo "perfect!!"
 	fi
@@ -43,10 +43,10 @@ elif [ $1 = "lm" ]; then # leak check mandatory
 	gcc -g -Wall -Wextra -Werror ../get_next_line.c \
 		../get_next_line_utils.c \
 		mandatory_main.c -D BUFFER_SIZE="$2"
-	valgrind --leak-check=full ./a.out $3 && rm a.out
-elif [ $1 = "lb" ]; then # leak check bonus
+	valgrind --leak-check=full ./a.out $3 && rm a.out && rm -r a.out.dSYM
+elif [ $1 = "lb" ]; then # leak check bonus 同じ
 	gcc -g -Wall -Wextra -Werror ../get_next_line_bonus.c \
 	../get_next_line_utils_bonus.c \
 		bonus_main.c -D BUFFER_SIZE="$2"
-	valgrind --leak-check=full ./a.out $3 $4 && rm a.out
+	valgrind --leak-check=full ./a.out $3 $4 && rm a.out && rm -r a.out.dSYM
 fi
