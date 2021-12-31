@@ -1,5 +1,5 @@
 # gnl_review_test
 
-Don't think , feel it!
+自分用
 
 ``` ./cmd.sh```
